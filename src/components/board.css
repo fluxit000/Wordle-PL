@@ -1,0 +1,42 @@
+#board {
+  border-top: 1px solid var(--dark-font);
+  padding-top: 1%;
+}
+.row {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+.cell {
+  color: white;
+  border: 1px solid var(--dark-font);
+  padding: 5px;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  text-transform: uppercase;
+  transition: transform 400ms;
+}
+@media screen and (max-width: 480px) {
+  .cell {
+    width: 40px;
+    height: 40px;
+    font-size: 30px;
+  }
+}
+.rotate-guess{
+  transform: rotateX(90deg);
+}
+.incorrect-guess {
+  background-color: rgb(95, 95, 95);
+}
+.medium-guess {
+  background-color: #c9ae39;
+}
+.correct-guess {
+  background-color: #57a151;
+}
