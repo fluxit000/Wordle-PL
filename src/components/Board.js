@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
+import wordExist from '../wordDataBase';
 
 const specialChar = ['ą','ś','ć','ó','ż','ź','ń','ę','ł']
+const correctWord = "CZOŁG"
 
 const Board = ()=>{
     const [board, setBoard] = useState([["","","","",""],["","","","",""],["","","","",""],["","","","",""],["","","","",""],["","","","",""]])
@@ -14,25 +16,36 @@ const Board = ()=>{
         if(e.key === "AltGraph"){
             setaltIsActive(true)
         }
-        else if(e.keyCode >= 65 && e.keyCode < 90 && currentRowIndex < 5){
+        else if(e.keyCode >= 65 && e.keyCode <= 90 && currentRowIndex < 5){
             const addChar = ()=>{
-                let temp = board
-                temp[currentGuess][currentRowIndex] = e.key
-                setCurrentRowIndex(index=> index+1, setBoard(temp))
+              let temp = board
+              temp[currentGuess][currentRowIndex] = e.key
+              setCurrentRowIndex(index=> index+1, setBoard(temp))
             }
             if(altIsActive){
-                if(specialChar.includes(e.key.toLocaleLowerCase())){
-                    addChar()
-                }
+              if(specialChar.includes(e.key.toLocaleLowerCase())){
+                  addChar()
+              }
             }
             else{
-                addChar()
+              addChar()
             }
           
         }
         else if(e.key === "Enter"){
           if(currentRowIndex === 5){
-            console.log(board[currentGuess].join(""))
+            if(wordExist(board[currentGuess].join("").toUpperCase())){
+              if(board[currentGuess].join("").toUpperCase() === correctWord){
+                //console.log(board[currentGuess].join("").toUpperCase())
+                console.log("word is corrent")
+              }
+              else{
+                console.log("word is not corrent")
+              }
+            }
+            else{
+              console.log("not found this word")
+            }
           }
         }
         else if(e.key === "Backspace" && currentRowIndex > 0){
