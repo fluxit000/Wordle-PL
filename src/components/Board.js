@@ -5,7 +5,7 @@ import "./board.css";
 const specialChar = ["ą", "ś", "ć", "ó", "ż", "ź", "ń", "ę", "ł"];
 const correctWord = "CZOŁG";
 
-const Board = () => {
+const Board = ({onWordNotFound}) => {
   const [board, setBoard] = useState([
     ["", "", "", "", ""],
     ["", "", "", "", ""],
@@ -89,7 +89,7 @@ const Board = () => {
               }
             }
             else {//not found this word in DB
-  
+              onWordNotFound()
             }
           }
         } 
