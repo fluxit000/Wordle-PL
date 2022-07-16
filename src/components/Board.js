@@ -5,7 +5,7 @@ import "./board.css";
 const specialChar = ["ą", "ś", "ć", "ó", "ż", "ź", "ń", "ę", "ł"];
 const correctWord = "CZOŁG";
 
-const Board = ({onWordNotFound}) => {
+const Board = ({onWordNotFound, onGameEnd}) => {
   const [board, setBoard] = useState([
     ["", "", "", "", ""],
     ["", "", "", "", ""],
@@ -113,6 +113,13 @@ const Board = ({onWordNotFound}) => {
     return () => window.removeEventListener("keydown", onKeyPress);
   }, [board, currentRowIndex, altIsActive, gameStatus]);
   
+
+  useEffect(()=>{
+    setTimeout(()=>{
+      onGameEnd(gameStatus, boardStatus)
+    },600)
+  },[gameStatus])
+
 
   useEffect(()=>{
     if(currentGuess == 6){
