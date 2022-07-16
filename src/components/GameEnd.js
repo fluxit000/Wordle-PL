@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import './gameEnd.css'
 
-const GameEnd = ({gameStatus, boardStatus})=>{
+const GameEnd = ({gameStatus, boardStatus, onNewGuess})=>{
     const [isShow, setIsShow] = useState(true)
     const [startExitAnimation, setStartExitAnimation] = useState(false)
     const [guessCount, setGuessCount] = useState(0)
@@ -21,7 +21,6 @@ const GameEnd = ({gameStatus, boardStatus})=>{
         guessCount = guessCount > 0? guessCount: 6
 
         for(let i = 0; i < guessCount; i++){
-            console.log(boardStatus[i])
             let temp = {correct: 0, medium: 0, incorrect: 0};
             boardStatus[i].map((item)=>{
                 temp[item]++
@@ -29,17 +28,21 @@ const GameEnd = ({gameStatus, boardStatus})=>{
             guessGraph.push(temp)
         }
 
-        console.log(guessGraph)
-
         setGuessGraph(guessGraph)
     }),[])
 
+    const onNextWord = ()=>{
+        setIsShow(false)
+        setGuessCount(0)
+        setGuessGraph([])
+        onNewGuess()
+    }
 
     return <>{isShow && <div className='background' onClick={onClickBackground}>
         <div className={"game-end "+(startExitAnimation? "game-end-exit": "")}>
             <div className='title'>You {gameStatus === 2? "lose": "win"}</div>
             <div className='details'>
-                {gameStatus === 1? "You guess in"+guessCount: ""}
+                {gameStatus === 1? "You guess in "+guessCount: ""}
                 <div className='graph'>
                     {guessGraph.map((item,i)=>
                         <div className='line-row' key={i}>
@@ -50,6 +53,9 @@ const GameEnd = ({gameStatus, boardStatus})=>{
                         </div>
                     )}
                 </div>
+            </div>
+            <div className='buttons'>
+                <button onClick={onNextWord} className="next">Next word</button>
             </div>
         </div>
     </div>}</>

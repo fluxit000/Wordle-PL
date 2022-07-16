@@ -3,9 +3,9 @@ import wordExist from "../wordDataBase";
 import "./board.css";
 
 const specialChar = ["ą", "ś", "ć", "ó", "ż", "ź", "ń", "ę", "ł"];
-const correctWord = "CZOŁG";
 
-const Board = ({onWordNotFound, onGameEnd}) => {
+
+const Board = ({onWordNotFound, onGameEnd, correctWord, gameIsReset}) => {
   const [board, setBoard] = useState([
     ["", "", "", "", ""],
     ["", "", "", "", ""],
@@ -22,6 +22,7 @@ const Board = ({onWordNotFound, onGameEnd}) => {
     ["", "", "", "", ""],
     ["", "", "", "", ""],
   ]);
+
   const [currentRowIndex, setCurrentRowIndex] = useState(0);
   const [currentGuess, setCurrentGuess] = useState(0);
 
@@ -30,6 +31,7 @@ const Board = ({onWordNotFound, onGameEnd}) => {
   const [rotateCell, setRotateCell] = useState(-1);
 
   const [gameStatus, setGameStatus] = useState(-1)//1-correct word 2-incorrect word
+
 
   const onBadGuess = (row) => {
     setRotateCell(row,
@@ -139,6 +141,29 @@ const Board = ({onWordNotFound, onGameEnd}) => {
       );
     }
   },[gameStatus, boardStatus, currentGuess])
+
+  useEffect(()=>{
+    console.log(gameIsReset)
+    if(gameIsReset){
+      setBoard([
+        ["", "", "", "", ""],
+        ["", "", "", "", ""],
+        ["", "", "", "", ""],
+        ["", "", "", "", ""],
+        ["", "", "", "", ""],
+        ["", "", "", "", ""],], console.log(board))
+      setBoardStatus([
+        ["", "", "", "", ""],
+        ["", "", "", "", ""],
+        ["", "", "", "", ""],
+        ["", "", "", "", ""],
+        ["", "", "", "", ""],
+        ["", "", "", "", ""],], console.log(board))
+      setCurrentRowIndex(0)
+      setCurrentGuess(0)
+      setGameStatus(-1)
+    }
+  },[gameIsReset])
 
   return (
     <div id="board">

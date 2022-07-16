@@ -74,3 +74,22 @@
 .incorrect{
   background-color: rgb(95, 95, 95);
 }
+.buttons{
+  border-top: 2px solid rgb(116, 116, 116);
+  padding-top: 10px;
+  width: 90%;
+  position: absolute;
+  bottom: 20px;
+
+  display: flex;
+  justify-content: flex-end;
+}
+.next{
+  background-color: #57a151;
+  border: none;
+  outline: none;
+  padding: 7px;
+  font-size: 16px;
+  margin-right: 10px;
+  cursor: pointer;
+}
