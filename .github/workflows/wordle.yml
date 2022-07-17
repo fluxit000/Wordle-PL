@@ -20,4 +20,4 @@ jobs:
     - run: npm ci
     - run: npm run build 
     - run: rm -r /var/www/wordle/*
-    - run: mv /home/lukasz/actions-runner/_work/Wordle-PL/Wordle-PL/build/* /var/www/wordle/
+    - run: mv /home/lukasz/wordle-runner/_work/Wordle-PL/Wordle-PL/build/* /var/www/wordle/
