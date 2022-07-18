@@ -142,7 +142,6 @@ const Board = ({onWordNotFound, onGameEnd, correctWord, gameIsReset}) => {
   },[gameStatus, boardStatus, currentGuess])
 
   useEffect(()=>{
-    console.log(gameIsReset)
     if(gameIsReset){
       setBoard([
         ["", "", "", "", ""],
@@ -150,14 +149,16 @@ const Board = ({onWordNotFound, onGameEnd, correctWord, gameIsReset}) => {
         ["", "", "", "", ""],
         ["", "", "", "", ""],
         ["", "", "", "", ""],
-        ["", "", "", "", ""],], console.log(board))
+        ["", "", "", "", ""]
+      ])
       setBoardStatus([
         ["", "", "", "", ""],
         ["", "", "", "", ""],
         ["", "", "", "", ""],
         ["", "", "", "", ""],
         ["", "", "", "", ""],
-        ["", "", "", "", ""],], console.log(board))
+        ["", "", "", "", ""]
+      ])
       setCurrentRowIndex(0)
       setCurrentGuess(0)
       setGameStatus(-1)

@@ -13,7 +13,6 @@ function App() {
   const [playExitAnimation, setPlayExitAnimation] = useState(false)
 
   useEffect(()=>{
-    console.log(notFound && !playExitAnimation)
     if(notFound && !playExitAnimation){
       setTimeout(()=>{
         setPlayExitAnimation(true)
