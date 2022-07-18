@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import './gameEnd.css'
 
-const GameEnd = ({gameStatus, boardStatus, onNewGuess})=>{
+const GameEnd = ({gameStatus, boardStatus, onNewGuess, correctWord})=>{
     const [isShow, setIsShow] = useState(true)
     const [startExitAnimation, setStartExitAnimation] = useState(false)
     const [guessCount, setGuessCount] = useState(0)
@@ -42,7 +42,7 @@ const GameEnd = ({gameStatus, boardStatus, onNewGuess})=>{
         <div className={"game-end "+(startExitAnimation? "game-end-exit": "")}>
             <div className='title'>You {gameStatus === 2? "lose": "win"}</div>
             <div className='details'>
-                {gameStatus === 1? "You guess in "+guessCount: ""}
+                {gameStatus === 1? "You guess in "+guessCount: "Corrent word was "+correctWord}
                 <div className='graph'>
                     {guessGraph.map((item,i)=>
                         <div className='line-row' key={i}>

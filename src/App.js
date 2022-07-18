@@ -55,7 +55,7 @@ function App() {
         Nie znaleziono takiego słowa w bazie danych
         <div className='timer'></div>
       </div>}
-      {gameStatus !== -1 && <GameEnd onNewGuess={onNewGuess} gameStatus={gameStatus} boardStatus={boardStatus}/>}
+      {gameStatus !== -1 && <GameEnd onNewGuess={onNewGuess} gameStatus={gameStatus} boardStatus={boardStatus} correctWord={correctWord}/>}
 
     </div>
   );
