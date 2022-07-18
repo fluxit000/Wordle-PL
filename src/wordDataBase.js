@@ -6358,7 +6358,6 @@ const wordDataBase = [
 ]
 
 const wordExist = word => {
-  console.log(word)
   return wordDataBase.includes(word)
 }
 

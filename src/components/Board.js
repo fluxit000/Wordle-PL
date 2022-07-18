@@ -87,11 +87,10 @@ const Board = ({onWordNotFound, onGameEnd, correctWord, gameIsReset}) => {
               } 
               else {//word is not corrent
                 onBadGuess(currentGuess);
-                
               }
             }
             else {//not found this word in DB
-              onWordNotFound()
+              onWordNotFound(true)
             }
           }
         } 
@@ -113,7 +112,7 @@ const Board = ({onWordNotFound, onGameEnd, correctWord, gameIsReset}) => {
     window.addEventListener("keyup", onKeyRelease);
 
     return () => window.removeEventListener("keydown", onKeyPress);
-  }, [board, currentRowIndex, altIsActive, gameStatus]);
+  }, [board, currentRowIndex, altIsActive, gameStatus ]);
   
 
   useEffect(()=>{
