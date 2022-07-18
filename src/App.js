@@ -12,16 +12,16 @@ function App() {
   const [notFound, setNotFound] = useState(false)
   const [playExitAnimation, setPlayExitAnimation] = useState(false)
 
-  const onWordNotFound = ()=>{
-    setNotFound(true)
-    setTimeout(()=>{
-      setPlayExitAnimation(true)
+  useEffect(()=>{
+    if(notFound && !playExitAnimation){
       setTimeout(()=>{
-        setNotFound(false)
-        setPlayExitAnimation(false)
-      },300)
-    },5100)
-  }
+        setPlayExitAnimation(true)
+        setTimeout(()=>{
+          setPlayExitAnimation(false, setNotFound(false))
+        },300)
+      },5100)
+    }
+  },[notFound, playExitAnimation])
 
 
   //game end
@@ -50,12 +50,12 @@ function App() {
   return (
     <div id='contener'>
       <Footer />
-      <Board onWordNotFound={onWordNotFound} onGameEnd={onGameEnd} correctWord={correctWord} gameIsReset={gameIsReset}/>
+      <Board onWordNotFound={setNotFound} onGameEnd={onGameEnd} correctWord={correctWord} gameIsReset={gameIsReset}/>
       {notFound && <div className={'not-found '+(playExitAnimation? "exit": "")}>
         Nie znaleziono takiego słowa w bazie danych
         <div className='timer'></div>
       </div>}
-      {gameStatus !== -1 && <GameEnd onNewGuess={onNewGuess} gameStatus={gameStatus} boardStatus={boardStatus}/>}
+      {gameStatus !== -1 && <GameEnd onNewGuess={onNewGuess} gameStatus={gameStatus} boardStatus={boardStatus} correctWord={correctWord}/>}
 
     </div>
   );
