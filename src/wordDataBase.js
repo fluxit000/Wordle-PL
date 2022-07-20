@@ -1,5 +1,4 @@
 const wordDataBase = [
-  "ABAJA",
   "ABAKA",
   "ABCUG",
   "ABDUL",
