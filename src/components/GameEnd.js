@@ -32,10 +32,13 @@ const GameEnd = ({gameStatus, boardStatus, onNewGuess, correctWord})=>{
     }),[])
 
     const onNextWord = ()=>{
-        setIsShow(false)
-        setGuessCount(0)
-        setGuessGraph([])
-        onNewGuess()
+        setStartExitAnimation(true,setTimeout(()=>{
+            setIsShow(false)
+            setGuessCount(0)
+            setGuessGraph([])
+            onNewGuess()
+        },600))
+        
     }
 
     return <>{isShow && <div className='background' onClick={onClickBackground}>
