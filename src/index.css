@@ -1,5 +1,6 @@
 :root {
-  --dark-font: rgb(197, 197, 197);
+  --font-color: rgb(197, 197, 197);
+  --background-color: rgb(53, 53, 53);
 }
 
 body {
@@ -9,7 +10,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgb(53, 53, 53);
+  background-color: var(--background-color);
   color: white;
   overflow-x: hidden;
 }
