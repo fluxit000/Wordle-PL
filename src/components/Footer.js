@@ -1,7 +1,6 @@
 import { useState } from "react"
 import Github from "../icons/github"
 import "./footer.css"
-import MaterialIcon from 'material-icons-react';
 
 
 const Footer = ()=>{
