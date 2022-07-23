@@ -1,17 +1,17 @@
 import { useState } from "react"
 import Github from "../icons/github"
-import "./footer.css"
+import "./nav.css"
 
 
-const Footer = ()=>{
+const Nav = ()=>{
     const [darkMode, setDarkMode] = useState(true)
 
-    return <div id='footer'>
-        <a className="logo" target="_blank" href="https://github.com/fluxit000/Wordle-PL">
-            <Github color="var(--dark-font)" size={35}/>
+    return <div id='nav'>
+        <a className="icon" target="_blank" href="https://github.com/fluxit000/Wordle-PL">
+            <Github color={darkMode?"white":"black"} size={35}/>
         </a>
         <div id="title">Wordle PL</div>
-        <span className="material-symbols-outlined dark-mode-icon" onClick={darkMode? 
+        <span className="material-symbols-outlined dark-mode-icon icon" onClick={darkMode? 
             ()=>{
                 document.documentElement.style.setProperty('--dark-font',"black")
                 document.documentElement.style.setProperty('--background-color',"white")
@@ -28,4 +28,4 @@ const Footer = ()=>{
     </div>
 }
 
-export default Footer
+export default Nav
