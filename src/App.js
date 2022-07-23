@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import Board from './components/Board';
-import Footer from './components/Footer';
+import Nav from './components/Nav';
 import GameEnd from './components/GameEnd';
 import getNewGuess from './guessList'
-
 
 function App() {
 
@@ -49,13 +48,13 @@ function App() {
 
   return (
     <div id='contener'>
-      <Footer />
+      {gameStatus !== -1 && <GameEnd onNewGuess={onNewGuess} gameStatus={gameStatus} boardStatus={boardStatus} correctWord={correctWord}/>}
+      <Nav />
       <Board onWordNotFound={setNotFound} onGameEnd={onGameEnd} correctWord={correctWord} gameIsReset={gameIsReset}/>
       {notFound && <div className={'not-found '+(playExitAnimation? "exit": "")}>
         Nie znaleziono takiego słowa w bazie danych
         <div className='timer'></div>
       </div>}
-      {gameStatus !== -1 && <GameEnd onNewGuess={onNewGuess} gameStatus={gameStatus} boardStatus={boardStatus} correctWord={correctWord}/>}
 
     </div>
   );
