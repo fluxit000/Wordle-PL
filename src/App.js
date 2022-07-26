@@ -36,7 +36,7 @@ function App() {
   }
 
   //generate new word
-  const [correctWord, setCorrectWord] = useState(getNewGuess());//"CZOŁG"
+  const [correctWord, setCorrectWord] = useState(/*getNewGuess()*/"CHLEB");//"CZOŁG"
   const [gameIsReset, setGameIsReset] = useState(false)
 
   const onNewGuess = ()=>{
