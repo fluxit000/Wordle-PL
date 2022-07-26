@@ -1,4 +1,4 @@
-import {createContext, useState, } from 'react'
+import {createContext, useEffect, useState, } from 'react'
 
 const BoardStateConext = createContext({
     setBoard: board => {},
@@ -19,7 +19,9 @@ const BoardStateConext = createContext({
         ["", "", "", "", ""],
     ],
     setBoardStatus: boardStatus => {},
-    stateChange: false
+    stateChange: false,
+    onKeyboardPress: key => {},
+    withKeyPress: ''
 })
 
 
@@ -52,7 +54,16 @@ export const BoardStateConextProvider = props=>{
     }
 
 
-    return <BoardStateConext.Provider value={{board, setBoard, boardStatus, setBoardStatus, stateChange}}>
+    const [withKeyPress, onKeyboardPress] = useState('')
+
+    useEffect(()=>{
+        setTimeout(()=>{onKeyboardPress('')},10)
+    },[withKeyPress])
+    
+
+    return <BoardStateConext.Provider 
+            value={{board, setBoard, boardStatus, setBoardStatus, stateChange,
+            onKeyboardPress, withKeyPress}}>
         {props.children}
       </BoardStateConext.Provider>
 } 
