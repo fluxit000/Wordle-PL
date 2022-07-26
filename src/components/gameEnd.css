@@ -6,6 +6,7 @@
     justify-content: center;
     align-items: center;
     color: black;
+    z-index: 1;
 }
 
 .game-end{

@@ -3,7 +3,6 @@
     height: 7%;
     font-size: 45px;
     border-bottom: 1px solid var(--font-color);
-    display: inline-block;
     display: flex;
 }
 #title{

@@ -1,0 +1,24 @@
+.keybord-line{
+    display: flex;
+    justify-content: center;
+}
+.keybord-letter{
+    padding: 15px;
+    margin: 3px;
+    border-radius: 5px;
+    background-color: #ccd0d4;
+    color: black;
+    cursor: pointer;
+    font-size: 20px;
+}
+#keybord{
+    margin-top: auto;
+    padding-bottom: 5px;
+}
+
+@media screen and (max-width: 480px) {
+    .keybord-letter{
+        padding: 13px;
+        margin: 2px;
+    }
+}
