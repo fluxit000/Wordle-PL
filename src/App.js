@@ -4,6 +4,8 @@ import Board from './components/Board';
 import Nav from './components/Nav';
 import GameEnd from './components/GameEnd';
 import getNewGuess from './guessList'
+import Keybord from './components/keybord';
+import BoardState, {BoardStateConextProvider} from './boardState';
 
 function App() {
 
@@ -34,7 +36,7 @@ function App() {
   }
 
   //generate new word
-  const [correctWord, setCorrectWord] = useState(getNewGuess());
+  const [correctWord, setCorrectWord] = useState(getNewGuess());//"CZOŁG"
   const [gameIsReset, setGameIsReset] = useState(false)
 
   const onNewGuess = ()=>{
@@ -48,13 +50,20 @@ function App() {
 
   return (
     <div id='contener'>
-      {gameStatus !== -1 && <GameEnd onNewGuess={onNewGuess} gameStatus={gameStatus} boardStatus={boardStatus} correctWord={correctWord}/>}
-      <Nav />
-      <Board onWordNotFound={setNotFound} onGameEnd={onGameEnd} correctWord={correctWord} gameIsReset={gameIsReset}/>
+      {gameStatus !== -1 && <GameEnd onNewGuess={onNewGuess} gameStatus={gameStatus} 
+      boardStatus={boardStatus} correctWord={correctWord}/>}
+
       {notFound && <div className={'not-found '+(playExitAnimation? "exit": "")}>
         Nie znaleziono takiego słowa w bazie danych
         <div className='timer'></div>
       </div>}
+
+      <Nav />
+      <BoardStateConextProvider>
+        <Board onWordNotFound={setNotFound} onGameEnd={onGameEnd} correctWord={correctWord} gameIsReset={gameIsReset} />
+        <Keybord />
+      </BoardStateConextProvider>
+      
 
     </div>
   );

@@ -1,27 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import wordExist from "../wordDataBase";
 import "./board.css";
+import BoardStateConext from "../boardState";
 
 const specialChar = ["ą", "ś", "ć", "ó", "ż", "ź", "ń", "ę", "ł"];
 
 
 const Board = ({onWordNotFound, onGameEnd, correctWord, gameIsReset}) => {
-  const [board, setBoard] = useState([
-    ["", "", "", "", ""],
-    ["", "", "", "", ""],
-    ["", "", "", "", ""],
-    ["", "", "", "", ""],
-    ["", "", "", "", ""],
-    ["", "", "", "", ""],
-  ]);
-  const [boardStatus, setBoardStatus] = useState([
-    ["", "", "", "", ""],
-    ["", "", "", "", ""],
-    ["", "", "", "", ""],
-    ["", "", "", "", ""],
-    ["", "", "", "", ""],
-    ["", "", "", "", ""],
-  ]);
+  const {board, setBoard, boardStatus, setBoardStatus} = useContext(BoardStateConext)
+
+
+
 
   const [currentRowIndex, setCurrentRowIndex] = useState(0);
   const [currentGuess, setCurrentGuess] = useState(0);
@@ -31,7 +20,6 @@ const Board = ({onWordNotFound, onGameEnd, correctWord, gameIsReset}) => {
   const [rotateCell, setRotateCell] = useState(-1);
 
   const [gameStatus, setGameStatus] = useState(-1)//1-correct word 2-incorrect word
-
 
   const onBadGuess = (row) => {
     setRotateCell(row,
@@ -49,12 +37,11 @@ const Board = ({onWordNotFound, onGameEnd, correctWord, gameIsReset}) => {
           }
         });
         setBoardStatus(temp);
-        setTimeout(() => {
-          setRotateCell(-1);
-          setCurrentGuess((guess)=>guess+1)
-          setCurrentRowIndex(0)
-        }, 200);
-      }, 200)
+
+        setRotateCell(-1);
+        setCurrentGuess((guess)=>guess+1)
+        setCurrentRowIndex(0)
+      }, 400)
     );
   };
 
@@ -112,15 +99,13 @@ const Board = ({onWordNotFound, onGameEnd, correctWord, gameIsReset}) => {
     window.addEventListener("keyup", onKeyRelease);
 
     return () => window.removeEventListener("keydown", onKeyPress);
-  }, [board, currentRowIndex, altIsActive, gameStatus ]);
-  
+  }, [board, currentRowIndex, altIsActive, gameStatus]);
 
   useEffect(()=>{
     setTimeout(()=>{
       onGameEnd(gameStatus, boardStatus)
     },600)
   },[gameStatus])
-
 
   useEffect(()=>{
     if(currentGuess == 6){
@@ -135,8 +120,8 @@ const Board = ({onWordNotFound, onGameEnd, correctWord, gameIsReset}) => {
           let temp = boardStatus;
           temp[currentGuess].fill("correct")
           setBoardStatus(temp);
-          setTimeout(() => {setRotateCell(-1);}, 200);
-        }, 200)
+          setRotateCell(-1)
+        }, 400)
       );
     }
   },[gameStatus, boardStatus, currentGuess])

@@ -5,6 +5,7 @@
   align-items: center;
 
   height:100vh;
+  overflow-x: hidden;
 }
 .not-found{
   position: absolute;
