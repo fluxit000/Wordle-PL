@@ -7,9 +7,7 @@ const specialChar = ["ą", "ś", "ć", "ó", "ż", "ź", "ń", "ę", "ł"];
 
 
 const Board = ({onWordNotFound, onGameEnd, correctWord, gameIsReset}) => {
-  const {board, setBoard, boardStatus, setBoardStatus} = useContext(BoardStateConext)
-
-
+  const {board, setBoard, boardStatus, setBoardStatus, withKeyPress} = useContext(BoardStateConext)
 
 
   const [currentRowIndex, setCurrentRowIndex] = useState(0);
@@ -19,9 +17,9 @@ const Board = ({onWordNotFound, onGameEnd, correctWord, gameIsReset}) => {
 
   const [rotateCell, setRotateCell] = useState(-1);
 
-  const [gameStatus, setGameStatus] = useState(-1)//1-correct word 2-incorrect word
+  const [gameStatus, setGameStatus] = useState(-1)//1-win game 2-lose game
 
-  const onBadGuess = (row) => {
+  const onBadGuess = (row) => {//on press ENTER / on incorrect guess
     setRotateCell(row,
       setTimeout(() => {
         let temp = boardStatus;
@@ -45,25 +43,32 @@ const Board = ({onWordNotFound, onGameEnd, correctWord, gameIsReset}) => {
     );
   };
 
-  useEffect(() => {
-    const onKeyPress = (e) => {
+  const addChar = (key) => {//add press char to board
+    let temp = board;
+    temp[currentGuess][currentRowIndex] = key;
+    setCurrentRowIndex((index) => index + 1, setBoard(temp));
+  };
+
+  useEffect(()=>{//when keybord component press key
+    if(withKeyPress !== "" && currentRowIndex < 5){
+      addChar(withKeyPress)
+    }
+  },[withKeyPress])
+
+  useEffect(() => {//on eny key press 
+    const onKeyPress = (e) => {//on key press MAIN
       if(gameStatus === -1){
-        if (e.key === "AltGraph") {
+        if (e.key === "AltGraph") {//on alt key press
           setaltIsActive(true);
         } 
         else if (e.keyCode >= 65 && e.keyCode <= 90 && currentRowIndex < 5) {//onKeyPress
-          const addChar = () => {
-            let temp = board;
-            temp[currentGuess][currentRowIndex] = e.key;
-            setCurrentRowIndex((index) => index + 1, setBoard(temp));
-          };
           if (altIsActive) {
             if (specialChar.includes(e.key.toLocaleLowerCase())) {
-              addChar();
+              addChar(e.key);
             }
           } 
           else {
-            addChar();
+            addChar(e.key);
           }
         } 
         else if (e.key === "Enter") {//on enter key
@@ -89,7 +94,7 @@ const Board = ({onWordNotFound, onGameEnd, correctWord, gameIsReset}) => {
       }
     };
 
-    const onKeyRelease = (e) => {
+    const onKeyRelease = (e) => {//on alt key is release
       if (e.key === "AltGraph") {
         setaltIsActive(false);
       }
@@ -101,19 +106,19 @@ const Board = ({onWordNotFound, onGameEnd, correctWord, gameIsReset}) => {
     return () => window.removeEventListener("keydown", onKeyPress);
   }, [board, currentRowIndex, altIsActive, gameStatus]);
 
-  useEffect(()=>{
+  useEffect(()=>{//on game end
     setTimeout(()=>{
       onGameEnd(gameStatus, boardStatus)
     },600)
   },[gameStatus])
 
-  useEffect(()=>{
+  useEffect(()=>{//on game lose
     if(currentGuess == 6){
       setGameStatus(2)
     }
   },[currentGuess])
 
-  useEffect(()=>{
+  useEffect(()=>{//on game win
     if(gameStatus === 1){
       setRotateCell(currentGuess,
         setTimeout(() => {
@@ -126,7 +131,7 @@ const Board = ({onWordNotFound, onGameEnd, correctWord, gameIsReset}) => {
     }
   },[gameStatus, boardStatus, currentGuess])
 
-  useEffect(()=>{
+  useEffect(()=>{//on game restart 
     if(gameIsReset){
       setBoard([
         ["", "", "", "", ""],
