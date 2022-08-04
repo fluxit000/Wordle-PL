@@ -4,7 +4,7 @@ import Board from './components/Board';
 import Nav from './components/Nav';
 import GameEnd from './components/GameEnd';
 import getNewGuess from './guessList'
-import Keybord from './components/keybord';
+import Keyboard from './components/keyboard';
 import BoardState, {BoardStateConextProvider} from './boardState';
 
 function App() {
@@ -61,7 +61,7 @@ function App() {
       <Nav />
       <BoardStateConextProvider>
         <Board onWordNotFound={setNotFound} onGameEnd={onGameEnd} correctWord={correctWord} gameIsReset={gameIsReset} />
-        <Keybord />
+        <Keyboard />
       </BoardStateConextProvider>
       
 

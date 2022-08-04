@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from 'react'
 import BoardStateConext from '../boardState'
-import './keybord.css'
+import './keyboard.css'
 
-const Keybord = ()=>{
+const Keyboard = ()=>{
     const letterBoard = [["Ą","Ć","Ę","Ł","Ó","Ś","Ń","Ż","Ź"],["Q","W","E","R","T","Y","U","I","O","P"]
                     ,["A","S","D","F","G","H","J","K","L"],["Z","X","C","V","B","N","M"]
                     ]
@@ -13,8 +13,6 @@ const Keybord = ()=>{
 
     const {board, boardStatus, stateChange, onKeyboardPress} = useContext(BoardStateConext)
 
-    const [uzlessCounter, setUzlessCounter] = useState(0)
-
     useEffect(()=>{
         if(boardStatus === undefined){
             return -1
@@ -24,11 +22,13 @@ const Keybord = ()=>{
                 if(boardStatus[i][k] === "correct" || boardStatus[i][k] === "medium"){
                     letterBoard.forEach((letters, c)=>{
                         let index = letters.findIndex((letter)=>{return letter == board[i][k].toUpperCase()})
+
                         if(index >= 0 && letterBoardStatus[c][index] !== "correct-guess"){
-                            let temp = letterBoardStatus
+                            let temp = [...letterBoardStatus]
                             temp[c][index] = boardStatus[i][k]+"-guess"
-                            setLetterBoardStatus(temp, setUzlessCounter((state)=>state+1))
+                            setLetterBoardStatus(temp)
                         }
+
                     })
                 }
             }
@@ -36,11 +36,14 @@ const Keybord = ()=>{
     },[stateChange])
 
 
-    return <div id='keybord'>{letterBoard.map((line, i)=>{
+    return <div id='keyboard'>{letterBoardStatus.map((line, i)=>{
         return (
-        <div className='keybord-line' key={line[i][0]+"A"}>
-            {line.map((letter, k)=>{
-                return <div key={letter} onClick={()=>{onKeyboardPress(letter)}} className={'keybord-letter '+letterBoardStatus[i][k]}>{letter}</div>
+        <div className='keyboard-line' key={letterBoard[i][0]+"A"}>
+            {line.map((status, k)=>{
+                return <div key={letterBoard[i][k]} onClick={()=>{onKeyboardPress(letterBoard[i][k])}} 
+                className={'keyboard-letter '+(status === null? "": status)}>
+                    {letterBoard[i][k]}
+                </div>
             })}
         </div>
         )
@@ -48,4 +51,4 @@ const Keybord = ()=>{
     )}</div>
 }
 
-export default Keybord
+export default Keyboard

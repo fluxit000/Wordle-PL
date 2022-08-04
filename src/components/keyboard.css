@@ -1,8 +1,8 @@
-.keybord-line{
+.keyboard-line{
     display: flex;
     justify-content: center;
 }
-.keybord-letter{
+.keyboard-letter{
     padding: 15px;
     margin: 3px;
     border-radius: 5px;
@@ -12,14 +12,14 @@
     font-size: 20px;
     user-select: none;
 }
-#keybord{
+#keyboard{
     margin-top: auto;
     padding-bottom: 5px;
     padding-top: 1%;
 }
 
 @media screen and (max-width: 480px) {
-    .keybord-letter{
+    .keyboard-letter{
         padding: 9px;
         margin: 2px;
     }
