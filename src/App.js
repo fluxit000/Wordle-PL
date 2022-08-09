@@ -37,14 +37,12 @@ function App() {
 
   //generate new word
   const [correctWord, setCorrectWord] = useState(getNewGuess());//"CZOŁG"
-  const [gameIsReset, setGameIsReset] = useState(false)
+  const [gameIsReset, setGameIsReset] = useState(0)
 
   const onNewGuess = ()=>{
     setGameStatus(-1)
     setBoardStatus(null)
-    setGameIsReset(true, setTimeout(()=>{
-      setGameIsReset(false)
-    },100))
+    setGameIsReset(state => state+1)
     setCorrectWord(getNewGuess())
   }
 
@@ -61,7 +59,7 @@ function App() {
       <Nav />
       <BoardStateConextProvider>
         <Board onWordNotFound={setNotFound} onGameEnd={onGameEnd} correctWord={correctWord} gameIsReset={gameIsReset} />
-        <Keyboard />
+        <Keyboard gameIsReset={gameIsReset}/>
       </BoardStateConextProvider>
       
 
