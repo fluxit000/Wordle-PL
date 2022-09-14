@@ -43,9 +43,9 @@ const GameEnd = ({gameStatus, boardStatus, onNewGuess, correctWord})=>{
 
     return <>{isShow && <div className='background' onClick={onClickBackground}>
         <div className={"game-end "+(startExitAnimation? "game-end-exit": "")}>
-            <div className='title'>You {gameStatus === 2? "lose": "win"}</div>
+            <div className='title'>{gameStatus === 2? "Przegrałeś": "Wygrałeś"}</div>
             <div className='details'>
-                {gameStatus === 1? "You guess in "+guessCount: "Corrent word was "+correctWord}
+                {gameStatus === 1? "Zgadłeś w "+guessCount+" próby": "Prawidłowe słowo to "+correctWord}
                 <div className='graph'>
                     {guessGraph.map((item,i)=>
                         <div className='line-row' key={i}>
@@ -58,7 +58,7 @@ const GameEnd = ({gameStatus, boardStatus, onNewGuess, correctWord})=>{
                 </div>
             </div>
             <div className='buttons'>
-                <button onClick={onNextWord} className="next">Next word</button>
+                <button onClick={onNextWord} className="next">Następne słowo</button>
             </div>
         </div>
     </div>}</>
