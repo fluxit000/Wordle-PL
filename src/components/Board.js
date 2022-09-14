@@ -56,41 +56,41 @@ const Board = ({onWordNotFound, onGameEnd, correctWord, gameIsReset}) => {
   },[withKeyPress])
 
   useEffect(() => {//on eny key press 
-    const onKeyPress = (e) => {//on key press MAIN
-      if(gameStatus === -1){
-        if (e.key === "AltGraph") {//on alt key press
-          setaltIsActive(true);
-        } 
-        else if (e.keyCode >= 65 && e.keyCode <= 90 && currentRowIndex < 5) {//onKeyPress
-          if (altIsActive) {
-            if (specialChar.includes(e.key.toLocaleLowerCase())) {
-              addChar(e.key);
-            }
-          } 
-          else {
-            addChar(e.key);
-          }
-        } 
-        else if (e.key === "Enter") {//on enter key
-          if (currentRowIndex === 5) {
-            if (wordExist(board[currentGuess].join("").toUpperCase())) {
-              if (board[currentGuess].join("").toUpperCase() === correctWord) {//word is corrent
-                setGameStatus(1)
-              } 
-              else {//word is not corrent
-                onBadGuess(currentGuess);
-              }
-            }
-            else {//not found this word in DB
-              onWordNotFound(true)
-            }
-          }
-        } 
-        else if (e.key === "Backspace" && currentRowIndex > 0) {//on Backspace key
-          let temp = board;
-          temp[currentGuess][currentRowIndex - 1] = "";
-          setCurrentRowIndex((index) => index - 1, setBoard(temp));
+    const onKeyPress = (e) => {
+      if(gameStatus !== -1){
+        return -1
+      }
+      if (e.key === "AltGraph") {
+        setaltIsActive(true);
+      } 
+
+      else if (e.keyCode >= 65 && e.keyCode <= 90 && currentRowIndex < 5) {//onKeyPress (check if character is letter)
+        if (altIsActive && !specialChar.includes(e.key.toLocaleLowerCase())) {
+          return -1
         }
+        else{
+          addChar(e.key);
+        }
+      } 
+      else if (e.key === "Enter") {//on enter key
+        if (currentRowIndex === 5) {
+          if (wordExist(board[currentGuess].join("").toUpperCase())) {
+            if (board[currentGuess].join("").toUpperCase() === correctWord) {//word is corrent
+              setGameStatus(1)
+            } 
+            else {//word is not corrent
+              onBadGuess(currentGuess);
+            }
+          }
+          else {//not found this word in DB
+            onWordNotFound(true)
+          }
+        }
+      } 
+      else if (e.key === "Backspace" && currentRowIndex > 0) {//on Backspace key
+        let temp = board;
+        temp[currentGuess][currentRowIndex - 1] = "";
+        setCurrentRowIndex((index) => index - 1, setBoard(temp));
       }
     };
 
@@ -105,6 +105,9 @@ const Board = ({onWordNotFound, onGameEnd, correctWord, gameIsReset}) => {
 
     return () => window.removeEventListener("keydown", onKeyPress);
   }, [board, currentRowIndex, altIsActive, gameStatus]);
+
+
+  //Game event
 
   useEffect(()=>{//on game end
     setTimeout(()=>{

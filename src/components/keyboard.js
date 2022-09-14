@@ -22,13 +22,11 @@ const Keyboard = ({gameIsReset})=>{
                 if(boardStatus[i][k] === "correct" || boardStatus[i][k] === "medium"){
                     letterBoard.forEach((letters, c)=>{
                         let index = letters.findIndex((letter)=>{return letter == board[i][k].toUpperCase()})
-
                         if(index >= 0 && letterBoardStatus[c][index] !== "correct-guess"){
                             let temp = [...letterBoardStatus]
                             temp[c][index] = boardStatus[i][k]+"-guess"
                             setLetterBoardStatus(temp)
                         }
-
                     })
                 }
             }
