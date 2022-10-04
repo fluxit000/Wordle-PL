@@ -5,7 +5,7 @@ import Nav from './components/Nav';
 import GameEnd from './components/GameEnd';
 import getNewGuess from './guessList'
 import Keyboard from './components/keyboard';
-import BoardState, {BoardStateConextProvider} from './boardState';
+import BoardState, {BoardStateConextProvider} from './store/boardState';
 
 function App() {
 

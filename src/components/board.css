@@ -20,6 +20,9 @@
   text-transform: uppercase;
   transition: transform 400ms;
 }
+.current{
+  border-color: white;
+}
 @media screen and (max-width: 480px) {
   .cell {
     width: 40px;
