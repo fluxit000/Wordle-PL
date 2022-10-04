@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
-import BoardStateConext from '../boardState'
+import BoardStateConext from '../store/boardState'
 import './keyboard.css'
 
 const Keyboard = ({gameIsReset})=>{

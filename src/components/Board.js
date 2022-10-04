@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import wordExist from "../wordDataBase";
 import "./board.css";
-import BoardStateConext from "../boardState";
+import BoardStateConext from "../store/boardState";
 
 const specialChar = ["ą", "ś", "ć", "ó", "ż", "ź", "ń", "ę", "ł"];
 
@@ -47,6 +47,7 @@ const Board = ({onWordNotFound, onGameEnd, correctWord, gameIsReset}) => {
     let temp = board;
     temp[currentGuess][currentRowIndex] = key;
     setCurrentRowIndex((index) => index + 1, setBoard(temp));
+    
   };
 
   useEffect(()=>{//when keybord component press key
@@ -168,7 +169,8 @@ const Board = ({onWordNotFound, onGameEnd, correctWord, gameIsReset}) => {
               className={
                 "cell " +
                 (rotateCell === i ? "rotate-guess" : "") +
-                (boardStatus[i][k] != "" ? boardStatus[i][k]+"-guess" : "")
+                (boardStatus[i][k] != "" ? boardStatus[i][k]+"-guess" : "") +
+                ((currentGuess*5+currentRowIndex >= i*5+k )? " current":"" )
               }
             >
               {item}
