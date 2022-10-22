@@ -1,6 +1,7 @@
 :root {
   --font-color: rgb(194, 194, 194);
   --background-color: rgb(53, 53, 53);
+  --border-current-color: white;
 }
 
 body {

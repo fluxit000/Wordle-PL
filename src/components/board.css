@@ -21,7 +21,7 @@
   transition: transform 400ms;
 }
 .current{
-  border-color: white;
+  border-color: var(--border-current-color);
 }
 @media screen and (max-width: 480px) {
   .cell {

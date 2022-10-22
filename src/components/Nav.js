@@ -15,11 +15,13 @@ const Nav = ()=>{
             ()=>{
                 document.documentElement.style.setProperty('--dark-font',"black")
                 document.documentElement.style.setProperty('--background-color',"white")
+                document.documentElement.style.setProperty('--border-current-color',"black")
                 setDarkMode(false)
             }:
             ()=>{
                 document.documentElement.style.setProperty('--dark-font',"rgb(197, 197, 197)")
                 document.documentElement.style.setProperty('--background-color',"rgb(53, 53, 53)")
+                document.documentElement.style.setProperty('--border-current-color',"white")
                 setDarkMode(true)
             }
         }
